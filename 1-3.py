@@ -25,7 +25,7 @@ f.write("1-3\n\n")
 
 
 for a, data in sorted(G.nodes(data=True), key=lambda x: x[1]['community']):
-    print('{a} {w}'.format(a=a, w=data['community']))
+    # print('{a} {w}'.format(a=a, w=data['community']))
     f.write('{a} {w} \n'.format(a=a, w=data['community']))
     
 label=[n[1]['community'] for n in G.nodes(data=True)]
