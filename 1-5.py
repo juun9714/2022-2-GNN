@@ -22,18 +22,14 @@ for c, v_c in enumerate(communities):
 
 G=nx.relabel_nodes(G, {n:str(n) for n in G.nodes()})
 
-# case 1 (initial value)
-node2vec = Node2Vec(graph=G, dimensions=64, walk_length=30, p=0.5, q=0.5, num_walks=200, workers=1) 
-model = node2vec.fit(window=10, min_count=1, batch_words=4)  
+# case 0 (initial value)
+node2vec = Node2Vec(graph=G, dimensions=16, walk_length=30, p=0.5, q=0.5, num_walks=200, workers=1) 
+model = node2vec.fit(window=10, min_count=1, batch_words=4)
 
 K = 3
 kmeans = KMeans(n_clusters=K, random_state=0).fit(model.wv.vectors)
 print(kmeans)
 
-# print(model.wv.index_to_key)
-# print(kmeans.labels_)
-
-# node_label=[[n, label] for n, label in zip(model.wv.index_to_key, kmeans.labels_) ]
 node_label=[[] for _ in range(K)]
 
 for n, label in zip(model.wv.index_to_key, kmeans.labels_):
