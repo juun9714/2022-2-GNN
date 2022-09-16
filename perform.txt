@@ -1,0 +1,16 @@
+# case 1 (initial value)
+node2vec = Node2Vec(graph=G, dimensions=64, walk_length=30, p=0.5, q=0.5, num_walks=200, workers=1) 
+model = node2vec.fit(window=10, min_count=1, batch_words=4)  
+
+missing node
+- 4 out of 34
+
+
+# case 2 (Dimension 128)
+node2vec = Node2Vec(graph=G, dimensions=128, walk_length=30, p=0.5, q=0.5, num_walks=200, workers=1) 
+model = node2vec.fit(window=10, min_count=1, batch_words=4)  
+
+# case 3 (Dimension 256)
+node2vec = Node2Vec(graph=G, dimensions=256, walk_length=30, p=0.5, q=0.5, num_walks=200, workers=1) 
+model = node2vec.fit(window=10, min_count=1, batch_words=4)  
+

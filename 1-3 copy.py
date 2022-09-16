@@ -12,7 +12,10 @@ from matplotlib import pyplot as plt
 
 
 G = nx.karate_club_graph()
-communities = sorted(nx_comm.greedy_modularity_communities(G), key=len)
+communities = nx_comm.greedy_modularity_communities(G)
+print(communities)
+print(sorted(communities))
+print(sorted(communities,key=len))
 print(f"The club has {len(communities)} communities.")
 
 for c, v_c in enumerate(communities):
