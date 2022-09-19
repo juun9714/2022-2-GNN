@@ -3,7 +3,7 @@ node2vec = Node2Vec(graph=G, dimensions=16, walk_length=30, p=0.5, q=0.5, num_wa
 model = node2vec.fit(window=10, min_count=1, batch_words=4)  
 
 # case 1 (initial value)
-node2vec = Node2Vec(graph=G, dimensions=64, walk_length=30, p=0.5, q=0.5, num_walks=200, workers=1) 
+node2vec = Node2Vec(graph=G, dimensions=64, walk_length=30, p=0.5, num_walks=200, workers=1) 
 model = node2vec.fit(window=10, min_count=1, batch_words=4)  
 
 # case 2 (Dimension 128)
@@ -15,3 +15,84 @@ node2vec = Node2Vec(graph=G, dimensions=256, walk_length=30, p=0.5, q=0.5, num_w
 model = node2vec.fit(window=10, min_count=1, batch_words=4)  
 
 # case 4 ()
+node2vec = Node2Vec(graph=G, dimensions=64, walk_length=10, p=0.5, q=0.5, num_walks=200, workers=1) 
+model = node2vec.fit(window=10, min_count=1, batch_words=4)  
+
+# case 5 ()
+node2vec = Node2Vec(graph=G, dimensions=64, walk_length=20, p=0.5, q=0.5, num_walks=200, workers=1) 
+model = node2vec.fit(window=10, min_count=1, batch_words=4)  
+
+# case 6 ()
+node2vec = Node2Vec(graph=G, dimensions=64, walk_length=30, p=0.1, q=0.1, num_walks=200, workers=1) 
+model = node2vec.fit(window=10, min_count=1, batch_words=4)  
+
+# case 7 ()
+node2vec = Node2Vec(graph=G, dimensions=64, walk_length=10, p=0.1, q=0.1, num_walks=200, workers=1) 
+model = node2vec.fit(window=10, min_count=1, batch_words=4)
+
+# case 8 ()
+node2vec = Node2Vec(graph=G, dimensions=64, walk_length=30, p=0.3, q=0.3, num_walks=200, workers=1) 
+model = node2vec.fit(window=10, min_count=1, batch_words=4)
+
+# case 9 ()
+node2vec = Node2Vec(graph=G, dimensions=64, walk_length=30, p=0.7, q=0.3, num_walks=200, workers=1) 
+model = node2vec.fit(window=10, min_count=1, batch_words=4)
+
+# case 10 ()
+node2vec = Node2Vec(graph=G, dimensions=64, walk_length=30, p=1, q=0.3, num_walks=200, workers=1) 
+model = node2vec.fit(window=10, min_count=1, batch_words=4)
+
+# case 11 ()
+node2vec = Node2Vec(graph=G, dimensions=64, walk_length=10, p=1, q=0.3, num_walks=200, workers=1) 
+model = node2vec.fit(window=10, min_count=1, batch_words=4)
+
+# case 12 ()
+node2vec = Node2Vec(graph=G, dimensions=64, walk_length=5, p=1, q=0.3, num_walks=200, workers=1) 
+model = node2vec.fit(window=10, min_count=1, batch_words=4)
+
+# case 13 ()
+node2vec = Node2Vec(graph=G, dimensions=64, walk_length=5, p=0.1, q=0.3, num_walks=200, workers=1) 
+model = node2vec.fit(window=10, min_count=1, batch_words=4)
+
+# case 14 ()
+node2vec = Node2Vec(graph=G, dimensions=64, walk_length=10, p=0.99999, q=0.11111, num_walks=200, workers=1) 
+model = node2vec.fit(window=10, min_count=1, batch_words=4)
+
+# case 15 -> 5 error
+node2vec = Node2Vec(graph=G, dimensions=64, walk_length=10, p=0.5, q=0.1, num_walks=200, workers=1) 
+model = node2vec.fit(window=10, min_count=1, batch_words=4)
+
+# case 16 -> p low q high
+node2vec = Node2Vec(graph=G, dimensions=64, walk_length=10, p=0.0001, q=0.99999, num_walks=200, workers=1) 
+model = node2vec.fit(window=10, min_count=1, batch_words=4)
+
+# case 17 -> p high q low
+node2vec = Node2Vec(graph=G, dimensions=64, walk_length=10, p=0.99999, q=0.11111, num_walks=200, workers=1) 
+model = node2vec.fit(window=10, min_count=1, batch_words=4)
+
+# case 18 -> p low q high & window -> case 16과 차이 없음
+node2vec = Node2Vec(graph=G, dimensions=64, walk_length=10, p=0.0001, q=0.99999, num_walks=200, workers=1) 
+model = node2vec.fit(window=5, min_count=1, batch_words=4)
+
+
+# case 19 -> p low q high & big window
+node2vec = Node2Vec(graph=G, dimensions=64, walk_length=10, p=0.0001, q=0.99999, num_walks=200, workers=1) 
+model = node2vec.fit(window=15, min_count=1, batch_words=4)
+
+
+# case 20 -> p low q high & small walk-length
+node2vec = Node2Vec(graph=G, dimensions=64, walk_length=5, p=0.0001, q=0.99999, num_walks=200, workers=1) 
+model = node2vec.fit(window=10, min_count=1, batch_words=4)
+
+
+case 16을 선택 (4개 error) vs case 17 (5개 error)
+
+16은 p가 낮고, q가 높기 때문에 좁은 지역을 고려하는 BFS와 유사하게 탐색을 한다.
+17은 p가 높고, q가 낮기 때문에 넓은 지역을 고려하는 DFS와 유사하게 탐색을 한다. 
+
+case 16의 정확도를 더 높이기 위해서 다른 parameter를 변경해보았음
+1. window를 10에서 5로 -> 변화 없음
+2. window를 10에서 15로 -> 엄청 바뀜
+3. dimension은 큰 영향력이 없음 
+4. walk_length는 5보다 10과 30이 나았음
+5. num_walks는 큰 영향 없음 

@@ -13,5 +13,5 @@ from matplotlib import pyplot as plt
 # 1.1
 G = nx.karate_club_graph()
 
-nx.draw_circular(G, with_labels=True)
+nx.draw(G, with_labels=True)
 plt.show()
