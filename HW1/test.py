@@ -22,7 +22,7 @@ model = deepwalk(H, walk_length=10, num_walks=80, workers=1)
 model.train(window_size=5,iter=3)
 
 embeddings = model.get_embeddings()
-
+print(embeddings)
 
 # retrieve the labels for each node
 labels = np.asarray([G.nodes[i]['club'] != 'Mr. Hi' for i in G.nodes]).astype(np.int64)
