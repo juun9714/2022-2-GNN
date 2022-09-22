@@ -28,8 +28,8 @@ label=[n[1]['community'] for n in G.nodes(data=True)]
 
 G=nx.relabel_nodes(G, {n:str(n) for n in G.nodes()})
 
-node2vec = Node2Vec(graph=G, dimensions=64, walk_length=30, p=0.4, q=0.8, num_walks=200, workers=1) 
-model = node2vec.fit(window=15, min_count=1, batch_words=4)
+node2vec = Node2Vec(graph=G, dimensions=64, walk_length=30, p=0.5, num_walks=200, workers=1) 
+model = node2vec.fit(window=10, min_count=1, batch_words=4)
 # model.wv.save_word2vec_format("emb.emb")
 
 enbedlist=list(model.wv.key_to_index)
